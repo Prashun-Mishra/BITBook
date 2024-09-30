@@ -1,0 +1,141 @@
+
+
+
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Post</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            /* background: linear-gradient(to right, #6a11cb, #2575fc); */
+            background: linear-gradient(to bottom right, #0072C6, #F5F5F5);
+            color: #fff;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        }
+
+        .form-container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 80%;
+            max-width: 600px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+        textarea {
+            width: 90%;
+            height: 150px;
+            padding: 10px;
+            margin-right: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #6a11cb;
+            border-radius: 5px;
+            resize: none;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        textarea:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 2px solid #6a11cb;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #2575fc;
+            outline: none;
+        }
+
+      
+        button {
+            border: 2px solid #24b4fb;
+            background-color: #24b4fb;
+            border-radius: 0.9em;
+            padding: 0.8em 1.2em 0.8em 1em;
+            transition: all ease-in-out 0.2s;
+            font-size: 18px;
+        }
+
+        button span {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background-color: #0071e2;
+        }
+
+        /*  */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Create Post</h1>
+    </header>
+    <div id="post-form" class="form-container">
+        <textarea id="content" placeholder="Write your post here..." required></textarea>
+        <label for="visibility">Visibility:</label>
+        <select id="visibility" required>
+            <option value="public">Public</option>
+            <option value="private">Private</option>
+        </select>
+        <button onclick="createPost()">Create Post</button>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+
+</html>

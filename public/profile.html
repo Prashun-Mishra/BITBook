@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+             body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f3f4f6;
+            color: #333;
+        }
+        h1 {
+            padding: 20px;
+            margin-left: 0;
+            padding-left: 0;
+            text-align:justify;
+            margin: 0;
+            font-size: 2.5em;
+            color: #fff;
+        }
+        nav {
+            background: linear-gradient(to right, #00c6ff, #0072ff);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1.1em;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #ffcc00;
+        }
+        .search-container {
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        #search-query {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px 0 0 5px;
+            font-size: 1em;
+            width: 290px;
+        }
+        #searching {
+            padding: 8px 15px;
+            border: 1px solid #ccc;
+            border-left: none;
+            border-radius: 0 5px 5px 0;
+            background: #007BFF;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        #searching:hover {
+            background: #0056b3;
+        }
+        #search-results {
+            list-style-type: none;
+            padding: 0;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            border-radius: 5px;
+            z-index: 1000;
+            margin-top: 5px;
+        }
+        #search-results li {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            transition: background 0.3s ease;
+        }
+        #search-results li:hover {
+            background: #f3f4f6;
+        }
+        #search-results li:last-child {
+            border-bottom: none;
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1.5s ease-out;
+        }
+        .profile h2 {
+            font-size: 1.5em;
+            border-bottom: 2px solid #007BFF;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        p, ul {
+            font-size: 1em;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f3f4f6;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            position: relative;
+        }
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            color: #fff;
+            background: #007BFF;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.3s ease;
+        }
+        button:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        .like-button {
+            background: none;
+            border: none;
+            color: #007BFF;
+            cursor: pointer;
+            font-size: 1em;
+            margin-right: 10px;
+        }
+        .like-button.liked {
+            color: #FF0000;
+        }
+        .like-count {
+            font-size: 0.9em;
+            color: #555;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .main-container {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            flex-wrap: wrap;
+        }
+        .left-column, .right-column {
+            flex: 1;
+            margin: 10px;
+            min-width: 300px;
+        }
+        .right-column {
+            max-width: 650px;
+        }
+        .searching {
+            margin-top: 0;
+            padding: 0;
+        }
+        .profile img {
+            border-radius: 50%;
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            display: block;
+            margin: 0 auto 20px;
+        }
+      
+        img {
+            width: 100px;
+            height:90px;
+            margin-top: 0px;
+            animation: fadeIn 1.5s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <nav>
+        <img src="./BITBook transparent.png" alt="BITBook Logo">
+        <h1>BITBook</h1>
+        <div class="search-container">
+            <label>
+            <input type="text" id="search-query" placeholder="Enter name to search">
+            <button id="searching" onclick="searchUsers()">Search</button>
+        </label>
+            <ul id="search-results"></ul>
+        </div>
+        <a href="#edit-profile-form" onclick="showEditProfileForm()">Edit Profile</a>
+    </nav>
+    <div class="main-container">
+        <div class="left-column">
+            <div id="user-info" class="container profile" id="profile-section">
+                <h2>Your Profile</h2>
+                <p><strong>Name:</strong> <span id="name"></span></p>
+                <p><strong>Email:</strong> <span id="email"></span></p>
+                <p><strong>Bio:</strong> <span id="bio"></span></p>
+                <p><strong>Gender:</strong> <span id="gender"></span></p>
+                <p><strong>Profession:</strong> <span id="profession"></span></p>
+                <div id="edit-profile-form" class="container profile" style="display:none;">
+                    <h2>Edit Profile</h2>
+                    <label for="edit-bio">Bio:</label>
+                    <input type="text" id="edit-bio"><br>
+                    <label for="edit-gender">Gender:</label>
+                    <select id="edit-gender">
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                    </select><br>
+                    <label for="edit-profession">Profession:</label>
+                    <input type="text" id="edit-profession"><br>
+                    <button onclick="updateProfile()">Update</button>
+                    <button onclick="hideEditProfileForm()">Cancel</button>
+                </div>
+            </div>
+            <div id="user-posts" class="container profile">
+                <h2>Your Posts</h2>
+                <ul id="post-list"></ul>
+            </div>
+        </div>
+        <div class="right-column">
+            <div id="searched-user-profile" class="container profile" style="display: none;">
+                <h2>Searched User Profile</h2>
+                <p><strong>Name:</strong> <span id="searched-name"></span></p>
+                <p><strong>Email:</strong> <span id="searched-email"></span></p>
+                <p><strong>Bio:</strong> <span id="searched-bio"></span></p>
+                <p><strong>Gender:</strong> <span id="searched-gender"></span></p>
+                <p><strong>Profession:</strong> <span id="searched-profession"></span></p>
+                
+                 <h3>Posts:</h3>
+                <ul id="searched-post-list"></ul>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html> 
